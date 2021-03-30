@@ -1,0 +1,26 @@
+---
+
+- hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+    - name: kernel_module test
+      kernel_module:
+        name: vxlan
+        state: present
+      register: _result
+
+    - name: debug
+      debug:
+        msg: "{{ _result }}"
+
+    - name: kernel_module test
+      kernel_module:
+        name: vxlan
+        state: absent
+      register: _result
+
+    - name: debug
+      debug:
+        msg: "{{ _result }}"
+
